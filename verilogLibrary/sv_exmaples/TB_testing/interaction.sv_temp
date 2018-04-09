@@ -1,0 +1,129 @@
+class transaction ;
+
+   rand logic [31:0] data;
+   int subid;
+   int tr_num;
+   
+   
+endclass // transaction
+
+typedef mailbox #(int) g2d;
+typedef mailbox #(transaction) d2g;
+
+
+
+class driver;
+
+   mailbox gen2drv, drv2gen;
+   
+   function new(mailbox gen2drv, drv2gen);
+      this.gen2drv = gen2drv;
+
+      this.drv2gen = drv2gen;
+   endfunction // new
+   
+   task start_drive();
+      fork
+	 drive();
+      join_none
+      
+   endtask // start_drive
+   
+   task drive();
+      forever begin
+	 transaction tr;
+	 gen2drv.get(tr);
+
+	 $display("%t tr.subid=%d, tr.data=%d",$time ,tr.subid, tr.data);
+	 drv2gen.put(tr.subid);
+	 
+	   //@(posedge top.clk);
+	 #5;
+	 
+	 
+      end
+   endtask // drive
+   
+     
+     endclass // driver
+
+
+
+class generator;
+
+   rand int num_trans;
+   int subid_q[$];
+   mailbox gen2drv;
+   mailbox drv2gen;
+   
+
+   function new (mailbox gen2drv, drv2gen);
+      this.gen2drv = gen2drv;
+      this.drv2gen = drv2gen;
+      
+   endfunction // new
+
+   task start_gen();
+      fork
+	 retrieve_subid();
+      join_none
+
+      fork
+	 send_tr();
+      join
+      
+   endtask // start_gen
+   
+
+   task retrieve_subid();
+      int i;
+      drv2gen.get(i);
+      subid_q.push_back(i);
+   endtask // retrieve_subid
+   
+   
+   task send_tr();
+      int count = 0;
+      
+      $display("Number of Transactions to be sent %d",num_trans);
+      
+      repeat (num_trans) begin
+	 transaction tr;
+	 wait($size(subid_q));
+	 tr = new();
+	 assert(tr.randomize());
+	 tr.subid = subid_q.pop_front();
+	 tr.tr_num = count;
+	 gen2drv.put(tr);
+	 count ++;
+      end
+   endtask // send_tr
+   
+
+endclass // generator
+
+
+program test;
+
+   driver drv;
+   generator gen;
+   mailbox #(int)drv2gen;
+
+   mailbox #(transaction) gen2drv;
+
+   initial begin
+      drv = new (gen2drv, drv2gen );
+      gen = new(gen2drv, drv2gen);
+      drv2gen  = new();
+      gen2drv  = new();
+      assert(gen.randomize());
+      drv.start_drive();
+      gen.start_gen();
+      
+      
+      
+   end
+   
+
+endprogram // test
+   

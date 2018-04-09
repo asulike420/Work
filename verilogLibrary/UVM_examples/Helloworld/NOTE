@@ -1,0 +1,38 @@
+design.sv
+
+interface dut;
+1. Define interface using logic types.
+2. No clocking block used.
+endinterface
+
+`include "uvm_macros.svh" //Used for `uvm_info
+
+module dut (dut_if dif);// interface is used instead of explicit port. ? input/ output property of port not defined.
+1.import uvm_pkg::*; // for $sformat
+2. Insert logic.
+endmodule
+
+
+~~~~~~~~~~~~
+testbench.sv
+~~~~~~~~~~~~
+
+`include "uvm_macros.svh"
+`include "mytestbench_pkg.svh"
+
+module top;
+import uvm_pkg::*;
+import my
+
+
+
+~~~~~~~~~~~~~~~~~
+Example Model:
+1. Print Bus field
+2. Top module calls the run_test task, which in turn gets handle of uvm_test
+   run_test method is from uvm_pkg::* , which gets the test handle passed to it.
+3. uvm_test instantiates env.
+4. env instantiates agent
+5. agent instantiates driver and sequence .
+6. driver drives the dut interface.
+

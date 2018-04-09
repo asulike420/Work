@@ -1,0 +1,28 @@
+
+* 
+
+* DONE Using delays in testbench.
+  CLOSED: [2015-07-09 Thu 20:29]
+  This dosen't work
+     initial
+     fork
+     begin 
+     a = 0;
+     #5
+     end
+     join
+
+     #5 cannot be at the end of the block. It should end with ';'. It is pasrt of a statement.
+
+* Differnce between new() and new[]. for user defined classes new() has to be explicitly called for each and every element created by new[].
+
+   #+BEGIN_SRC verilog-mode -n -r 
+module test();
+    o1 = new[10];
+    foreach(o1[i]) o1[i]= new();
+endmodule
+
+   #+END_SRC
+  
+* TODO Wild equality and wild inequality
+  [[http://www.asic-world.com/systemverilog/operators3.html]]

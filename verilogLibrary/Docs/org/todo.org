@@ -1,0 +1,7 @@
+
+
+* TODO Modeling delays in verilog. SDF anotation.
+
+* TODO System verilog event regions.
+
+* TODO Different phases in UVM . What are run time phases.

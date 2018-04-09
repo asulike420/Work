@@ -1,0 +1,6 @@
+* SCRAMBLER
+* CRC
+* ENCODER 8B-10B
+* IFFT-FFT
+* Basic/SOC building blocks
+* 

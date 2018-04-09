@@ -1,0 +1,27 @@
+// Code your testbench here
+// or browse Examples
+
+module test;
+  
+   logic req, grant;
+   reg 	 clk;
+   initial $monitor("%t grant=%d, req=%d",$time ,grant, req);
+   overlaping: assert property (@(posedge clk)  req  |->  grant);
+   nonOverlaping : assert property (@(posedge clk) req |=> grant);
+      
+   always @(posedge clk)
+     grant <= req;
+   
+   initial clk = 0;
+   
+   always #1 clk = ~clk;
+      
+      initial begin
+        req <= 0;
+        @(posedge clk) req <= 1;
+       #50
+        $finish();
+      end
+      
+  
+endmodule
