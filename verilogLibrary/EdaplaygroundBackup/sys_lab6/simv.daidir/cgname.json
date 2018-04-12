@@ -1,0 +1,72 @@
+{
+    "_vcs_DPI_package": [
+        "_vcs_DPI_package",
+        "uM9F1",
+        "module"
+    ],
+    "host_io": [
+        "host_io",
+        "zQ0SK",
+        "module"
+    ],
+    "router": [
+        "router",
+        "yFjQe",
+        "module"
+    ],
+    "vcs_paramclassrepository": [
+        "vcs_paramclassrepository",
+        "hEeZs",
+        "module"
+    ],
+    "test": [
+        "test",
+        "x9Hvb",
+        "module"
+    ],
+    "_vcs_unit__4210886309": [
+        "_vcs_unit__4210886309",
+        "mbgwA",
+        "module"
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module"
+    ],
+    "std": [
+        "std",
+        "reYIK",
+        "module"
+    ],
+    "uvm_pkg": [
+        "uvm_pkg",
+        "zr7M1",
+        "module"
+    ],
+    "router_io": [
+        "router_io",
+        "WSps8",
+        "module"
+    ],
+    "reset_io": [
+        "reset_io",
+        "Qc1ND",
+        "module"
+    ],
+    "iport": [
+        "iport",
+        "w69je",
+        "module"
+    ],
+    "oport": [
+        "oport",
+        "qNPkI",
+        "module"
+    ],
+    "router_test_top": [
+        "router_test_top",
+        "Cy4Zv",
+        "module"
+    ]
+}

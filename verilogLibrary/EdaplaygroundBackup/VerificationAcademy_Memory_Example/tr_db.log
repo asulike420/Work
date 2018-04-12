@@ -1,0 +1,6 @@
+  CREATE_STREAM @0 {NAME:auto_tests T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:3423}
+  CREATE_STREAM @0 {NAME:rst_seq T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:2658}
+  CREATE_STREAM @790 {NAME:reg_bash T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:3672}
+  CREATE_STREAM @4150 {NAME:setup T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:3636}
+  CREATE_STREAM @4570 {NAME:walk T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:3651}
+  CREATE_STREAM @1847950 {NAME:m_1_test T:Transactions SCOPE:uvm_test_top.m_env.m_ahb_agent.m_sequencer STREAM:3453}

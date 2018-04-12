@@ -1,0 +1,57 @@
+0 
+26
++vcs+flush+all
++vcs+lic+wait
++warn=all
+-Mamsrun=
+-Masflags=--32
+-Mcc=gcc
+-Mcfl= -pipe -m32 -O -I/apps/vcsmx/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -m32 -m32
+-Mobjects= /apps/vcsmx/linux/lib/libvirsim.so /apps/vcsmx/linux/lib/liberrorinf.so /apps/vcsmx/linux/lib/libsnpsmalloc.so
+-Mout=simv
+-Msaverestoreobj=/apps/vcsmx/linux/lib/vcs_save_restore_new.o
+-Msyslibs=/apps/vcsmx/linux/lib/ctype-stubs_32.a -ldl
+-Mvcsaceobjs=
+-Mxcflags= -pipe -m32 -I/apps/vcsmx/include
+-gen_obj
+-picarchive
+-sverilog
+-timescale=1ns/1ns
+/apps/vcsmx/linux/bin/vcs1
+design.sv
+testbench.sv
+18
+sysc_uni_pwd=/home/runner
+container=lxc
+VMR_MODE_FLAG=32
+VCS_VERSION=2014.12-SP1-1
+VCS_PATH=/apps/vcsmx/bin
+VCS_MX_HOME_INTERNAL=1
+VCS_HOME=/apps/vcsmx
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH_OVERRIDE=linux
+VCS_ARCH=linux
+VCS_AMD_PURE32=1
+UNAME=/bin/uname
+TOOL_HOME=/apps/vcsmx/linux
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+OVA_UUM=0
+LC_ALL=C
+0
+2
+1523491141 testbench.sv
+1523491141 design.sv
+4
+0 
+1429847281 /apps/vcsmx/linux/lib/libvirsim.so
+1429846787 /apps/vcsmx/linux/lib/liberrorinf.so
+1429846777 /apps/vcsmx/linux/lib/libsnpsmalloc.so
+1523491144 simv.daidir

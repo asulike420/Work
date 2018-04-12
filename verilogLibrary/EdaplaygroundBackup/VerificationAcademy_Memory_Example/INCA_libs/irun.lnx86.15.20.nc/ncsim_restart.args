@@ -1,0 +1,29 @@
+//
+// File created by:  irun
+// Do not modify this file
+//
+-MESSAGES
+-uvmhome
+/playground_lib/uvm-1.2
+-sv_lib
+/incisiv/15.20/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so
+-UNBUFFERED
++UVM_TESTNAME=mem_ss_test
++EMGRLOG
+irun.log
+-XLSTIME
+1523495056
+-XLKEEP
+-XLMODE
+./INCA_libs/irun.lnx86.15.20.nc
+-RUNMODE
+-CDSLIB
+./INCA_libs/irun.lnx86.15.20.nc/cds.lib
+-HDLVAR
+./INCA_libs/irun.lnx86.15.20.nc/hdl.var
+-XLNAME
+irun
+-XLVERSION
+"TOOL:	irun	15.20-s038"
+-XLNAME
+./INCA_libs/irun.lnx86.15.20.nc/5aaa74c263ab_7

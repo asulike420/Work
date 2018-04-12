@@ -1,0 +1,153 @@
+irun: 15.20-s038: (c) Copyright 1995-2017 Cadence Design Systems, Inc.
+TOOL:	irun	15.20-s038: Started on Apr 12, 2018 at 02:04:16 BST
+irun
+	-Q
+	-unbuffered
+	-timescale 1ns/1ns
+	-sysv
+	+UVM_TESTNAME=mem_ss_test
+	-access +rw
+	-uvmnocdnsextra
+	-uvmhome /playground_lib/uvm-1.2
+	/playground_lib/uvm-1.2/src/uvm_macros.svh
+	design.sv
+	testbench.sv
+`uvm_component_utils(ahb_monitor);
+                                 |
+ncvlog: *W,UEXPSC (ahb_monitor.svh,27|33): Ignored unexpected semicolon following SystemVerilog description keyword (endfunction).
+(`include file: ahb_monitor.svh line 27, `include file: ahb_agent_pkg.sv line 36, file: testbench.sv line 9)
+  ahb_seq_item req = ahb_seq_item::type_id::create("req");;
+                                                          |
+ncvlog: *W,UEXPSC (ahb_read_seq.svh,57|58): Ignored unexpected semicolon following SystemVerilog description keyword (req).
+(`include file: ahb_read_seq.svh line 57, `include file: ahb_agent_pkg.sv line 46, file: testbench.sv line 9)
+$CDSROOT = /incisiv/15.20
+$TESTDIR = /home/runner
+
+TOOL:	ncsc	15.20-s038
+ncsc C++ parameters: 
+	ncsc -COMPILER $CDSROOT/tools/cdsgcc/gcc/4.8/bin/g++ 
+	-f ./INCA_libs/irun.lnx86.15.20.nc/ncsc_run/ncsc_obj/ncsc.args
+	-MANUAL 
+	-CFLAGS "-DNCSC
+		-I$CDSROOT/tools/systemc/include_pch
+		-I$CDSROOT/tools/tbsc/include
+		-I$CDSROOT/tools/vic/include
+		-I$CDSROOT/tools/methodology/OVM/CDNS-2.1.2/sc/src
+		-I/playground_lib/uvm-1.2/sc/sc
+		-I/playground_lib/uvm-1.2/ml/sc
+		-I$CDSROOT/tools/systemc/include/cci
+		-I$CDSROOT/tools/systemc/include/factory
+		-I$CDSROOT/tools/systemc/include/tlm2
+		-c
+		-x c++ -m32  -Wall 
+		-I$CDSROOT/tools/include
+		-I$CDSROOT/tools/inca/include"
+
+ncsc: compiling $/playground_lib/uvm-1.2/src/dpi/uvm_dpi.cc
+$CDSROOT/tools/include/svdpi_compatibility.h:48:2: warning: #warning "INCISIV is currently compliant with DPI header file svdpi.h as per IEEE 1800-2005. Starting IUS16.10, the default header file will be as per IEEE 1800-2012. DPI applications which need to continue complying with IEEE 1800-2005 will need to compile with the macro DPI_COMPATIBILITY_VERSION_1800v2005 starting in 16.1. The difference in the two header files is in the declaration of the struct t_vpi_vecval." [-Wcpp]
+ #warning "INCISIV is currently compliant with DPI header file svdpi.h as per IEEE 1800-2005. Starting IUS16.10, the default header file will be as per IEEE 1800-2012. DPI applications which need to continue complying with IEEE 1800-2005 will need to compile with the macro DPI_COMPATIBILITY_VERSION_1800v2005 starting in 16.1. The difference in the two header files is in the declaration of the struct t_vpi_vecval."
+/playground_lib/uvm-1.2/src/dpi/uvm_hdl_inca.c:179:15: warning: variable 'logic_bit' set but not used [-Wunused-but-set-variable]
+
+building library run.so
+
+	Top level design units:
+		uvm_pkg
+		mem_ss_reg_pkg
+		ahb_agent_pkg
+		mem_ss_env_pkg
+		mem_ss_seq_lib_pkg
+		mem_ss_test_lib_pkg
+		top_tb
+ncelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+Loading snapshot worklib.top_tb:sv .................... Done
+SVSEED default: 1
+ncsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+ncsim> source /incisiv/15.20/tools/inca/files/ncsimrc
+ncsim> run
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_root.svh(392) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test mem_ss_test...
+UVM_INFO @ 0: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [STARTING_SEQ] 
+
+Starting rst_seq sequence...
+
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 0: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_1_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 130: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_2_offset in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 190: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_2_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 250: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_3_offset in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 310: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_3_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 370: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_status in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 430: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_1_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 490: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_2_offset in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 550: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_2_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 610: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_3_offset in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 670: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_3_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_hw_reset_seq.svh(130) @ 730: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@rst_seq [uvm_reg_hw_reset_seq] Verifying reset value of register mem_ss_rm.mem_status in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO @ 790: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash [STARTING_SEQ] 
+
+Starting reg_bash sequence...
+
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 790: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_1_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 790: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_1_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 790: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_2_offset in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1030: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_2_offset in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1270: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_2_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1270: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_2_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1270: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_3_offset in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1510: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_3_offset in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1750: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_3_range in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1750: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_3_range in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 1750: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_status in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_reg_bit_bash_seq.svh(129) @ 2950: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@reg_bash.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] Verifying bits in register mem_ss_rm.mem_status in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO @ 4570: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@walk [STARTING_SEQ] 
+
+Starting walk sequence...
+
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_mem_walk_seq.svh(118) @ 4570: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@walk.single_mem_walk_seq [uvm_mem_walk_seq] Walking memory mem_ss_rm.mem_2 in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_mem_walk_seq.svh(118) @ 741790: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@walk.single_mem_walk_seq [uvm_mem_walk_seq] Walking memory mem_ss_rm.mem_2 in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_mem_walk_seq.svh(118) @ 1479010: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@walk.single_mem_walk_seq [uvm_mem_walk_seq] Walking memory mem_ss_rm.mem_3 in map "mem_ss_rm.AHB_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/reg/sequences/uvm_mem_walk_seq.svh(118) @ 1663270: uvm_test_top.m_env.m_ahb_agent.m_sequencer@@walk.single_mem_walk_seq [uvm_mem_walk_seq] Walking memory mem_ss_rm.mem_3 in map "mem_ss_rm.AHB_2_map"...
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_objection.svh(1271) @ 1849150: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO mem_ss_test.svh(72) @ 1849150: uvm_test_top [** UVM TEST PASSED **] Memory controller test completed OK
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_report_server.svh(847) @ 1849150: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   35
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[** UVM TEST PASSED **]     1
+[RNTST]     1
+[STARTING_SEQ]     3
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+[uvm_mem_walk_seq]     4
+[uvm_reg_bit_bash_seq]    12
+[uvm_reg_hw_reset_seq]    12
+
+Simulation complete via $finish(1) at time 1849150 NS + 64
+/playground_lib/uvm-1.2/src/base/uvm_root.svh:517     $finish;
+ncsim> exit
+TOOL:	irun	15.20-s038: Exiting on Apr 12, 2018 at 02:04:30 BST  (total: 00:00:14)
