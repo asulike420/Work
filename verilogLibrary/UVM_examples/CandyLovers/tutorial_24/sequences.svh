@@ -282,6 +282,68 @@ class jelly_bean_reg_sequence extends uvm_reg_sequence;
     assert( value == YUMMY );
     #10ns ;
   endtask: body
+
+
+//Initialization	
+//new	Create a new field instance
+//configure	Instance-specific configuration
+//Introspection	
+//get_name	Get the simple name
+//get_full_name	Get the hierarchical name
+//get_parent	Get the parent register
+//get_lsb_pos	Return the position of the field
+//get_n_bits	Returns the width, in number of bits, of the field.
+//get_max_size	Returns the width, in number of bits, of the largest field.
+//set_access	Modify the access policy of the field
+//define_access	Define a new access policy value
+//get_access	Get the access policy of the field
+//is_known_access	Check if access policy is a built-in one.
+//set_volatility	Modify the volatility of the field to the specified one.
+//is_volatile	Indicates if the field value is volatile
+//Access	
+//set	Set the desired value for this field
+//get	Return the desired value of the field
+//reset	Reset the desired/mirrored value for this field.
+//get_reset	Get the specified reset value for this field
+//has_reset	Check if the field has a reset value specified
+//set_reset	Specify or modify the reset value for this field
+//needs_update	Check if the abstract model contains different desired and mirrored values.
+//write	Write the specified value in this field
+//read	Read the current value from this field
+//poke	Deposit the specified value in this field
+//peek	Read the current value from this field
+//mirror	Read the field and update/check its mirror value
+//set_compare	Sets the compare policy during a mirror update.
+//get_compare	Returns the compare policy for this field.
+//is_indv_accessible	Check if this field can be written individually, i.e.
+//predict	Update the mirrored value for this field.
+//Callbacks	
+//pre_write	Called before field write.
+//post_write	Called after field write.
+//pre_read	Called before field read.
+//post_read	Called after field read.
+
+
+   
+   virtual task inspect_reg(uvm_reg r);
+      uvm_reg_field fields[$];
+      $display("[Abhay] r.get_name = %s", r.get_name());
+      $display("[Abhay] r.get_full_name = %s", r.get_full_name());
+      r.get_fields(fields);
+      foreach(fields[i]) begin
+	 $display("[Abhay] fields[%d].get_name = %s", i, fields[0].get_name());
+	 $display("[Abhay] feilds[%d].get_fullname = %s",i, fields[i].get_full_name());
+	 //HDL paths needs to be derived from reg .
+	 $display("[Abhay] fields[%d].get_parent().get_name = %s", i, fields[i].get_parent().get_name());
+	 $display("[Abhay] fields[%d].get_lsb_pos = %d", i, fields[i].get_lsb_pos());
+	 $display("[Abhay] fields[%d].get_n_bits = %d", i, fields[i].get_n_bits());
+	 $display("[Abhay] fields[%d].get_max_size = %d", i, fields[i].get_max_size());
+      end
+
+
+
+
+
      
 endclass: jelly_bean_reg_sequence
 
