@@ -1,0 +1,22 @@
+/* Meta boxes */
+
+#sharethis-meta-box .button-check-wrap {
+	display: block;
+	margin-bottom: .5rem;
+}
+
+#sharethis-meta-box .sharethis-shortcode {
+	background: #ffffff;
+	border: 1px solid #b4b9be;
+	width: 100%;
+	margin-right: 1rem;
+}
+
+#sharethis-meta-box .under-message {
+	font-style: italic;
+	color: #979797;
+}
+
+#sharethis-meta-box #sticky {
+	margin-bottom: 1rem;
+}

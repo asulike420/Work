@@ -1,0 +1,30 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - php
+  fixme:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+  phan:
+    enabled: true
+    config:
+      file_extensions: "php"
+      ignore-undeclared: false
+      quick: false
+      backward-compatibility-checks: true
+      dead-code-detection: true
+
+ratings:
+  paths:
+  - "**.php"
+  - "**.js"
+  - "**.css"
+
+exclude_paths:
+- tests/
+- lib/
