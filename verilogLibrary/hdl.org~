@@ -1,0 +1,15 @@
+* Usage guidelines
+
+** Use capture to store code snipets
+Just use TODO option in org capture.
+
+** Use save-desktop-mode for saving the session in uvm folder
+
+** Use desktop-change-dir to switch ti uvm session
+
+** Save the updated hdl.org to github after each usage.
+
+
+
+** Do not use 
+g

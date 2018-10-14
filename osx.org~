@@ -1,0 +1,109 @@
+* Tasks
+** TODO [Apache2] File to set server root directory.
+  
+UserDir /Users/abhaysingh/Sites
+
+#
+# Control access to UserDir directories.  The following is an example
+# for a site where these directories are restricted to read-only.
+#
+Include /private/etc/apache2/users/*.conf
+<IfModule bonjour_module>
+       RegisterUserSite customized-users
+</IfModule>
+
+   [[file:/etc/apache2/extra/httpd-userdir.conf][file:/etc/apache2/extra/httpd-userdir.conf]]
+** TODO [Apache2] Enable various features , like running perl from particullar directory inside root directory.
+  
+   [[file:/etc/apache2/httpd.conf][file:/etc/apache2/httpd.conf]]
+** TODO [HTTP] This folder has experimental , from scratcg webpages.
+  
+   [[file:~/Sites/abhaysingh][file:~/Sites/abhaysingh]]
+** TODO [Wordpress] This folder has experimetal wordpress files
+  
+   [[file:~/Sites/ex1][file:~/Sites/ex1]]
+** TODO [Javascript/Wordpress] Below script is used to create table of content, using heders on a page.
+<script>
+      window.onload = function () {
+           var toc = "";
+           var level = 0;
+
+           document.getElementById("contents").innerHTML =
+                 document.getElementById("contents").innerHTML.replace(
+                   /<h([\d])>([^<]+)<\/h([\d])>/gi,
+                   function (str, openLevel, titleText, closeLevel) {
+                       console.log("Print args");
+                       console.log(str, openLevel, titleText, closeLevel);
+                       console.log("Print args done");
+                       if (openLevel != closeLevel) {
+                           return str;
+                         }
+
+                         if (openLevel > level) {
+                           toc += (new Array(openLevel - level + 1)).join("<ul>");
+                         } else if (openLevel < level) {
+                           toc += (new Array(level - openLevel + 1)).join("</ul>");
+                         }
+                       console.log("----------------------------")
+                       console.log("Print toc 1");
+                       console.log(toc);
+                       console.log("Print toc 1 done");
+                       console.log("----------------------------")
+                         level = parseInt(openLevel);
+
+                         var anchor = titleText.replace(/ /g, "_");
+                         toc += "<li><a href=\"#" + anchor + "\">" + titleText
+                           + "</a></li>";
+
+                       console.log("----------------------------")
+                       console.log("Print toc 2");
+                       console.log(toc);
+                       console.log("Print toc 2 done");
+                       console.log("----------------------------")
+                       console.log("----------------------------")
+                       console.log("Print anchor");
+                       console.log(anchor);
+                       console.log("Print anchor done");
+                       console.log("----------------------------")
+                       console.log("----------------------------")
+                       console.log("Print return");
+                       console.log( "<h" + openLevel + "><a name=\"" + anchor + "\">"
+                                    + titleText + "</a></h" + closeLevel + ">");
+
+                       console.log("Print return done");
+                       console.log("----------------------------")
+                         return "<h" + openLevel + "><a name=\"" + anchor + "\">"
+                           + titleText + "</a></h" + closeLevel + ">";
+                   }
+                 );
+
+           if (level) {
+               console.log("Adding closing ul");
+                 toc += (new Array(level + 1)).join("</ul>");
+               console.log("Last entry: "+ toc);
+           }
+
+           document.getElementById("toc").innerHTML += toc;
+       document.getElementById("toc2").innerHTML += toc;
+         };
+</script>
+
+   [[file:~/Sites/testHtml/testJavascript.html::window.onload%20=%20function%20()%20{%20var%20toc%20=%20"";%20var%20level%20=%200;%20document.getElementById("contents").innerHTML%20=%20document.getElementById("contents").innerHTML.replace(%20/<h(%5B\d%5D)>(%5B^<%5D+)<\/h(%5B\d%5D)>/gi,%20function%20(str,%20openLevel,%20titleText,%20closeLevel)%20{%20console.log("Print%20args");%20console.log(str,%20openLevel,%20titleText,%20closeLevel);%20console.log("Print%20args%20done");%20if%20(openLevel%20!=%20closeLevel)%20{%20return%20str;%20}%20if%20(openLevel%20>%20level)%20{%20toc%20+=%20(new%20Array(openLevel%20-%20level%20+%201)).join("<ul>");%20}%20else%20if%20(openLevel%20<%20level)%20{%20toc%20+=%20(new%20Array(level%20-%20openLevel%20+%201)).join("</ul>");%20}%20console.log("----------------------------")%20console.log("Print%20toc%201");%20console.log(toc);%20console.log("Print%20toc%201%20done");%20console.log("----------------------------")%20level%20=%20parseInt(openLevel);%20var%20anchor%20=%20titleText.replace(/%20/g,%20"_");%20toc%20+=%20"<li><a%20href=\"#"%20+%20anchor%20+%20"\">"%20+%20titleText%20+%20"</a></li>";%20console.log("----------------------------")%20console.log("Print%20toc%202");%20console.log(toc);%20console.log("Print%20toc%202%20done");%20console.log("----------------------------")%20console.log("----------------------------")%20console.log("Print%20anchor");%20console.log(anchor);%20console.log("Print%20anchor%20done");%20console.log("----------------------------")%20console.log("----------------------------")%20console.log("Print%20return");%20console.log(%20"<h"%20+%20openLevel%20+%20"><a%20name=\""%20+%20anchor%20+%20"\">"%20+%20titleText%20+%20"</a></h"%20+%20closeLevel%20+%20">");%20console.log("Print%20return%20done");%20console.log("----------------------------")%20return%20"<h"%20+%20openLevel%20+%20"><a%20name=\""%20+%20anchor%20+%20"\">"%20+%20titleText%20+%20"</a></h"%20+%20closeLevel%20+%20">";%20}%20);%20if%20(level)%20{%20console.log("Adding%20closing%20ul");%20toc%20+=%20(new%20Array(level%20+%201)).join("</ul>");%20console.log("Last%20entry:%20"+%20toc);%20}%20document.getElementById("toc").innerHTML%20+=%20toc;%20document.getElementById("toc2").innerHTML%20+=%20toc;%20};]]
+** TODO [Wordpress/Widget] Category Widget Class
+   class WP_Widget_Categories extends WP_Widget
+   [[file:~/Sites/ex1/wp-includes/widgets/class-wp-widget-categories.php::class%20WP_Widget_Categories%20extends%20WP_Widget]]
+** TODO [Wordpress/Debug] 
+  
+// Enable WP_DEBUG mode
+define( 'WP_DEBUG', true );
+
+// Enable Debug logging to the /wp-content/debug.log file
+define( 'WP_DEBUG_LOG', true );
+
+// Disable display of errors and warnings 
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set( 'display_errors', 0 );
+
+// Use dev versions of core JS and CSS files (only needed if you are modifying these core files)
+define( 'SCRIPT_DEBUG', true );
+   [[file:~/Sites/ex1/wp-config.php::define('WP_DEBUG',%20true);]]

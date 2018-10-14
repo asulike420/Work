@@ -1,0 +1,292 @@
+* Usage guidelines
+
+** Use capture to store code snipets
+Just use TODO option in org capture.
+
+** Use save-desktop-mode for saving the session in uvm folder
+
+** Use desktop-change-dir to switch ti uvm session
+
+** Save the updated hdl.org to github after each usage.
+
+** TODO Create Chapters taking reference from LRM
+** Do not use 
+* Tasks
+** TODO DRV - Create section for each task and functions in the uvm driver section.
+   class driver extends uvm_driver #(packet);
+     virtual router_io vif;           // DUT virtual interface
+     int               port_id = -1;  // Driver's designated port
+
+     `uvm_component_utils_begin(driver)
+       `uvm_field_int(port_id, UVM_ALL_ON | UVM_DEC)
+     `uvm_component_utils_end
+
+     function new(string name, uvm_component parent);
+       super.new(name, parent);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+     endfunction: new
+
+     function void build_phase(uvm_phase phase);
+       super.build_phase(phase);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+
+       uvm_config_db#(int)::get(this, "", "port_id", port_id);
+       if (!(port_id inside {-1, [0:15]})) begin
+         `uvm_fatal("CFGERR", $sformatf("port_id must be {-1, [0:15]}, not %0d!", port_id));
+       end
+       uvm_config_db#(virtual router_io)::get(this, "", "vif", vif);
+       if (vif == null) begin
+         `uvm_fatal("CFGERR", "Interface for Driver not set");
+       end
+     endfunction: build_phase
+
+     virtual function void start_of_simulation_phase(uvm_phase phase);
+       super.start_of_simulation_phase(phase);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       `uvm_info("DRV_CFG", $sformatf("port_id is: %0d", port_id), UVM_MEDIUM);
+     endfunction: start_of_simulation_phase
+
+     virtual task run_phase(uvm_phase phase);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+
+       forever begin
+         seq_item_port.get_next_item(req);
+
+         if (port_id inside { -1, req.sa }) begin
+           send(req);
+           `uvm_info("DRV_RUN", {"\n", req.sprint()}, UVM_MEDIUM);
+         end
+
+         seq_item_port.item_done();
+       end
+     endtask: run_phase
+
+     //
+     // In the interest of lab time, all device drivers have been done for you:
+     //
+
+     virtual task send(packet tr);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       send_address(tr);
+       send_pad(tr);
+       send_payload(tr);
+     endtask: send
+
+     virtual task send_address(packet tr);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       vif.drvClk.frame_n[tr.sa] <= 1'b0;
+       for(int i=0; i<4; i++) begin
+         vif.drvClk.din[tr.sa] <= tr.da[i];
+         @(vif.drvClk);
+       end
+     endtask: send_address
+
+     virtual task send_pad(packet tr);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       vif.drvClk.din[tr.sa] <= 1'b1;
+       vif.drvClk.valid_n[tr.sa] <= 1'b1;
+       repeat(5) @(vif.drvClk);
+     endtask: send_pad
+
+     virtual task send_payload(packet tr);
+       logic [7:0] datum;
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       while(!vif.drvClk.busy_n[tr.sa]) @(vif.drvClk);
+       foreach(tr.payload[index]) begin
+         datum = tr.payload[index];
+         for(int i=0; i<$size(tr.payload, 2); i++) begin
+           vif.drvClk.din[tr.sa] <= datum[i];
+           vif.drvClk.valid_n[tr.sa] <= 1'b0;
+           vif.drvClk.frame_n[tr.sa] <= ((tr.payload.size()-1) == index) && (i==7);
+           @(vif.drvClk);
+         end
+       end
+       vif.drvClk.valid_n[tr.sa] <= 1'b1;
+     endtask: send_payload
+
+   endclass: driver
+
+   [[file:~/GitHub/Work/verilogLibrary/UVM_examples/ces_uvm-1.2_2014.12/labs/lab6/driver.sv::class%20driver%20extends%20uvm_driver%20#(packet);%20virtual%20router_io%20vif;%20//%20DUT%20virtual%20interface%20int%20port_id%20=%20-1;%20//%20Driver's%20designated%20port%20`uvm_component_utils_begin(driver)%20`uvm_field_int(port_id,%20UVM_ALL_ON%20|%20UVM_DEC)%20`uvm_component_utils_end%20function%20new(string%20name,%20uvm_component%20parent);%20super.new(name,%20parent);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20endfunction:%20new%20function%20void%20build_phase(uvm_phase%20phase);%20super.build_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20uvm_config_db#(int)::get(this,%20"",%20"port_id",%20port_id);%20if%20(!(port_id%20inside%20{-1,%20%5B0:15%5D}))%20begin%20`uvm_fatal("CFGERR",%20$sformatf("port_id%20must%20be%20{-1,%20%5B0:15%5D},%20not%20%250d!",%20port_id));%20end%20uvm_config_db#(virtual%20router_io)::get(this,%20"",%20"vif",%20vif);%20if%20(vif%20==%20null)%20begin%20`uvm_fatal("CFGERR",%20"Interface%20for%20Driver%20not%20set");%20end%20endfunction:%20build_phase%20virtual%20function%20void%20start_of_simulation_phase(uvm_phase%20phase);%20super.start_of_simulation_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20`uvm_info("DRV_CFG",%20$sformatf("port_id%20is:%20%250d",%20port_id),%20UVM_MEDIUM);%20endfunction:%20start_of_simulation_phase%20virtual%20task%20run_phase(uvm_phase%20phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20forever%20begin%20seq_item_port.get_next_item(req);%20if%20(port_id%20inside%20{%20-1,%20req.sa%20})%20begin%20send(req);%20`uvm_info("DRV_RUN",%20{"\n",%20req.sprint()},%20UVM_MEDIUM);%20end%20seq_item_port.item_done();%20end%20endtask:%20run_phase%20//%20//%20In%20the%20interest%20of%20lab%20time,%20all%20device%20drivers%20have%20been%20done%20for%20you:%20//%20virtual%20task%20send(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20send_address(tr);%20send_pad(tr);%20send_payload(tr);%20endtask:%20send%20virtual%20task%20send_address(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20vif.drvClk.frame_n%5Btr.sa%5D%20<=%201'b0;%20for(int%20i=0;%20i<4;%20i++)%20begin%20vif.drvClk.din%5Btr.sa%5D%20<=%20tr.da%5Bi%5D;%20@(vif.drvClk);%20end%20endtask:%20send_address%20virtual%20task%20send_pad(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20vif.drvClk.din%5Btr.sa%5D%20<=%201'b1;%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b1;%20repeat(5)%20@(vif.drvClk);%20endtask:%20send_pad%20virtual%20task%20send_payload(packet%20tr);%20logic%20%5B7:0%5D%20datum;%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20while(!vif.drvClk.busy_n%5Btr.sa%5D)%20@(vif.drvClk);%20foreach(tr.payload%5Bindex%5D)%20begin%20datum%20=%20tr.payload%5Bindex%5D;%20for(int%20i=0;%20i<$size(tr.payload,%202);%20i++)%20begin%20vif.drvClk.din%5Btr.sa%5D%20<=%20datum%5Bi%5D;%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b0;%20vif.drvClk.frame_n%5Btr.sa%5D%20<=%20((tr.payload.size()-1)%20==%20index)%20&&%20(i==7);%20@(vif.drvClk);%20end%20end%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b1;%20endtask:%20send_payload%20endclass:%20driver]]
+** TODO MON Create separate section for each task and functions
+   class iMonitor extends uvm_monitor;
+     virtual router_io vif;
+     int               port_id = -1;
+
+     uvm_analysis_port #(packet) analysis_port;
+
+     `uvm_component_utils_begin(iMonitor)
+       `uvm_field_int(port_id, UVM_DEFAULT | UVM_DEC)
+     `uvm_component_utils_end
+
+     function new(string name, uvm_component parent);
+       super.new(name, parent);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+     endfunction: new
+
+     virtual function void build_phase(uvm_phase phase);
+       super.build_phase(phase);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       uvm_config_db#(int)::get(this, "", "port_id", port_id);
+       if (!(port_id inside {-1, [0:15]})) begin
+         `uvm_fatal("CFGERR", $sformatf("port_id must be {-1, [0:15]}, not %0d!", port_id));
+       end
+       uvm_config_db#(virtual router_io)::get(this, "", "vif", vif);
+       if (vif == null) begin
+         `uvm_fatal("CFGERR", "iMonitor DUT interface not set");
+       end
+
+       analysis_port = new("analysis_port", this);
+     endfunction: build_phase
+
+     virtual task run_phase(uvm_phase phase);
+       packet tr;
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+
+       forever begin
+         tr = packet::type_id::create("tr", this);
+         tr.sa = this.port_id;
+         get_packet(tr);
+         `uvm_info("Got_Input_Packet", {"\n", tr.sprint()}, UVM_MEDIUM);
+         analysis_port.write(tr);
+       end
+     endtask: run_phase
+
+     //
+     // In the interest of lab time, the device driver code is done for you.
+     //
+
+     virtual task get_packet(packet tr);
+       logic [7:0] datum;
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+
+       wait (vif.iMonClk.frame_n[port_id] !==0);
+       @(vif.iMonClk iff (vif.iMonClk.frame_n[port_id] === 0));
+
+       for (int i=0; i<4; i++) begin
+         if (!vif.iMonClk.frame_n[port_id]) begin
+           tr.da[i] = vif.iMonClk.din[port_id];
+         end else begin
+           `uvm_fatal("Header_Error", $sformatf("@ Header cycle %0d, Frame not zero", i));
+         end
+         @(vif.iMonClk);
+       end
+
+       for (int i=0; i<5; i++) begin
+         if (!vif.iMonClk.frame_n[port_id]) begin
+           if (vif.iMonClk.valid_n[port_id] && vif.iMonClk.din[port_id]) begin
+             @(vif.iMonClk);
+             continue;
+           end else begin
+             `uvm_fatal("Header_Error", $sformatf("@%0d Valid or Din zero", i));
+           end
+         end else begin
+           `uvm_fatal("Header_Error", "Frame not zero");
+         end
+       end
+
+       forever begin
+         for(int i=0; i<8; i=i) begin
+           if (!vif.iMonClk.valid_n[port_id]) begin
+             if (vif.iMonClk.busy_n[port_id]) begin
+               datum[i++] = vif.iMonClk.din[port_id];
+               if (i == 8) begin
+                 tr.payload.push_back(datum);
+               end
+             end else begin
+               `uvm_fatal("Payload_Error", "Busy & Valid conflict");
+             end
+           end
+           if (vif.iMonClk.frame_n[port_id]) begin
+             if (i == 8) begin
+               return;
+             end else begin
+               `uvm_fatal("Payload_Error", "Not byte aligned");
+             end
+           end
+           @(vif.iMonClk);
+         end
+       end
+     endtask: get_packet
+
+   endclass: iMonitor
+
+   [[file:~/GitHub/Work/verilogLibrary/UVM_examples/ces_uvm-1.2_2014.12/labs/lab6/iMonitor.sv::class%20iMonitor%20extends%20uvm_monitor;%20virtual%20router_io%20vif;%20int%20port_id%20=%20-1;%20uvm_analysis_port%20#(packet)%20analysis_port;%20`uvm_component_utils_begin(iMonitor)%20`uvm_field_int(port_id,%20UVM_DEFAULT%20|%20UVM_DEC)%20`uvm_component_utils_end%20function%20new(string%20name,%20uvm_component%20parent);%20super.new(name,%20parent);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20endfunction:%20new%20virtual%20function%20void%20build_phase(uvm_phase%20phase);%20super.build_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20uvm_config_db#(int)::get(this,%20"",%20"port_id",%20port_id);%20if%20(!(port_id%20inside%20{-1,%20%5B0:15%5D}))%20begin%20`uvm_fatal("CFGERR",%20$sformatf("port_id%20must%20be%20{-1,%20%5B0:15%5D},%20not%20%250d!",%20port_id));%20end%20uvm_config_db#(virtual%20router_io)::get(this,%20"",%20"vif",%20vif);%20if%20(vif%20==%20null)%20begin%20`uvm_fatal("CFGERR",%20"iMonitor%20DUT%20interface%20not%20set");%20end%20analysis_port%20=%20new("analysis_port",%20this);%20endfunction:%20build_phase%20virtual%20task%20run_phase(uvm_phase%20phase);%20packet%20tr;%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20forever%20begin%20tr%20=%20packet::type_id::create("tr",%20this);%20tr.sa%20=%20this.port_id;%20get_packet(tr);%20`uvm_info("Got_Input_Packet",%20{"\n",%20tr.sprint()},%20UVM_MEDIUM);%20analysis_port.write(tr);%20end%20endtask:%20run_phase%20//%20//%20In%20the%20interest%20of%20lab%20time,%20the%20device%20driver%20code%20is%20done%20for%20you.%20//%20virtual%20task%20get_packet(packet%20tr);%20logic%20%5B7:0%5D%20datum;%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20wait%20(vif.iMonClk.frame_n%5Bport_id%5D%20!==0);%20@(vif.iMonClk%20iff%20(vif.iMonClk.frame_n%5Bport_id%5D%20===%200));%20for%20(int%20i=0;%20i<4;%20i++)%20begin%20if%20(!vif.iMonClk.frame_n%5Bport_id%5D)%20begin%20tr.da%5Bi%5D%20=%20vif.iMonClk.din%5Bport_id%5D;%20end%20else%20begin%20`uvm_fatal("Header_Error",%20$sformatf("@%20Header%20cycle%20%250d,%20Frame%20not%20zero",%20i));%20end%20@(vif.iMonClk);%20end%20for%20(int%20i=0;%20i<5;%20i++)%20begin%20if%20(!vif.iMonClk.frame_n%5Bport_id%5D)%20begin%20if%20(vif.iMonClk.valid_n%5Bport_id%5D%20&&%20vif.iMonClk.din%5Bport_id%5D)%20begin%20@(vif.iMonClk);%20continue;%20end%20else%20begin%20`uvm_fatal("Header_Error",%20$sformatf("@%250d%20Valid%20or%20Din%20zero",%20i));%20end%20end%20else%20begin%20`uvm_fatal("Header_Error",%20"Frame%20not%20zero");%20end%20end%20forever%20begin%20for(int%20i=0;%20i<8;%20i=i)%20begin%20if%20(!vif.iMonClk.valid_n%5Bport_id%5D)%20begin%20if%20(vif.iMonClk.busy_n%5Bport_id%5D)%20begin%20datum%5Bi++%5D%20=%20vif.iMonClk.din%5Bport_id%5D;%20if%20(i%20==%208)%20begin%20tr.payload.push_back(datum);%20end%20end%20else%20begin%20`uvm_fatal("Payload_Error",%20"Busy%20&%20Valid%20conflict");%20end%20end%20if%20(vif.iMonClk.frame_n%5Bport_id%5D)%20begin%20if%20(i%20==%208)%20begin%20return;%20end%20else%20begin%20`uvm_fatal("Payload_Error",%20"Not%20byte%20aligned");%20end%20end%20@(vif.iMonClk);%20end%20end%20endtask:%20get_packet%20endclass:%20iMonitor]]
+** TODO SCB Create separate section for each task and functions
+   class ms_scoreboard extends uvm_scoreboard;
+
+     `uvm_analysis_imp_decl(_before)
+     `uvm_analysis_imp_decl(_after)
+
+     uvm_analysis_imp_before #(packet, ms_scoreboard) before_export;
+     uvm_analysis_imp_after  #(packet, ms_scoreboard) after_export;
+     uvm_in_order_class_comparator #(packet) comparator[16];
+     int count = 0;
+     realtime timeout = 10us;
+
+     `uvm_component_utils(ms_scoreboard)
+
+     function new(string name, uvm_component parent);
+       super.new(name, parent);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+     endfunction: new
+
+     virtual function void build_phase(uvm_phase phase);
+       super.build_phase(phase);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       before_export = new("before_export", this);
+       after_export  = new("after_export", this);
+       for (int i=0; i < 16; i++) begin
+         comparator[i] = uvm_in_order_class_comparator #(packet)::type_id::create($sformatf("comparator_%0d", i), this);
+       end
+     endfunction: build_phase
+
+     virtual function void write_before(packet pkt);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       comparator[pkt.da].before_export.write(pkt);
+       count++;
+     endfunction: write_before
+
+     virtual function void write_after(packet pkt);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       comparator[pkt.da].after_export.write(pkt);
+       count--;
+     endfunction: write_after
+
+     virtual task wait_for_done();
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       fork
+         begin
+           fork
+             wait(count == 0);
+             begin
+               #timeout;
+               `uvm_warning("TIMEOUT", $sformatf("Scoreboard has %0d unprocessed expected objects", count));
+             end
+           join_any
+           disable fork;
+         end
+       join
+     endtask: wait_for_done
+
+     virtual function void set_timeout(realtime timeout);
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       this.timeout=timeout;
+     endfunction: set_timeout
+
+     virtual function realtime get_timeout();
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       return (timeout);
+     endfunction: get_timeout
+
+     virtual function void report();
+       `uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+       foreach (comparator[i]) begin
+         `uvm_info("Scoreboard_Report",
+           $sformatf("Comparator[%0d] Matches = %0d, Mismatches = %0d",
+             i, comparator[i].m_matches, comparator[i].m_mismatches), UVM_MEDIUM);
+       end
+     endfunction: report
+
+   endclass: ms_scoreboard
+
+   [[file:~/GitHub/Work/verilogLibrary/UVM_examples/ces_uvm-1.2_2014.12/labs/lab6/ms_scoreboard.sv::class%20ms_scoreboard%20extends%20uvm_scoreboard;%20`uvm_analysis_imp_decl(_before)%20`uvm_analysis_imp_decl(_after)%20uvm_analysis_imp_before%20#(packet,%20ms_scoreboard)%20before_export;%20uvm_analysis_imp_after%20#(packet,%20ms_scoreboard)%20after_export;%20uvm_in_order_class_comparator%20#(packet)%20comparator%5B16%5D;%20int%20count%20=%200;%20realtime%20timeout%20=%2010us;%20`uvm_component_utils(ms_scoreboard)%20function%20new(string%20name,%20uvm_component%20parent);%20super.new(name,%20parent);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20endfunction:%20new%20virtual%20function%20void%20build_phase(uvm_phase%20phase);%20super.build_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20before_export%20=%20new("before_export",%20this);%20after_export%20=%20new("after_export",%20this);%20for%20(int%20i=0;%20i%20<%2016;%20i++)%20begin%20comparator%5Bi%5D%20=%20uvm_in_order_class_comparator%20#(packet)::type_id::create($sformatf("comparator_%250d",%20i),%20this);%20end%20endfunction:%20build_phase%20virtual%20function%20void%20write_before(packet%20pkt);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20comparator%5Bpkt.da%5D.before_export.write(pkt);%20count++;%20endfunction:%20write_before%20virtual%20function%20void%20write_after(packet%20pkt);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20comparator%5Bpkt.da%5D.after_export.write(pkt);%20count--;%20endfunction:%20write_after%20virtual%20task%20wait_for_done();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20fork%20begin%20fork%20wait(count%20==%200);%20begin%20#timeout;%20`uvm_warning("TIMEOUT",%20$sformatf("Scoreboard%20has%20%250d%20unprocessed%20expected%20objects",%20count));%20end%20join_any%20disable%20fork;%20end%20join%20endtask:%20wait_for_done%20virtual%20function%20void%20set_timeout(realtime%20timeout);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20this.timeout=timeout;%20endfunction:%20set_timeout%20virtual%20function%20realtime%20get_timeout();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20return%20(timeout);%20endfunction:%20get_timeout%20virtual%20function%20void%20report();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20foreach%20(comparator%5Bi%5D)%20begin%20`uvm_info("Scoreboard_Report",%20$sformatf("Comparator%5B%250d%5D%20Matches%20=%20%250d,%20Mismatches%20=%20%250d",%20i,%20comparator%5Bi%5D.m_matches,%20comparator%5Bi%5D.m_mismatches),%20UVM_MEDIUM);%20end%20endfunction:%20report%20endclass:%20ms_scoreboard]]
