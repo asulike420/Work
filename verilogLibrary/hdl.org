@@ -5,14 +5,17 @@ Just use TODO option in org capture.
 
 ** Use save-desktop-mode for saving the session in uvm folder
 
-** Use desktop-change-dir to switch ti uvm session
+**  Use desktop-change-dir to switch ti uvm session
 
 ** Save the updated hdl.org to github after each usage.
 
 ** TODO Create Chapters taking reference from LRM
 ** Do not use 
+
 * Tasks
 ** TODO DRV - Create section for each task and functions in the uvm driver section.
+
+#+BEGIN_SRC verilog
    class driver extends uvm_driver #(packet);
      virtual router_io vif;           // DUT virtual interface
      int               port_id = -1;  // Driver's designated port
@@ -105,6 +108,8 @@ Just use TODO option in org capture.
      endtask: send_payload
 
    endclass: driver
+
+#+END_SRC
 
    [[file:~/GitHub/Work/verilogLibrary/UVM_examples/ces_uvm-1.2_2014.12/labs/lab6/driver.sv::class%20driver%20extends%20uvm_driver%20#(packet);%20virtual%20router_io%20vif;%20//%20DUT%20virtual%20interface%20int%20port_id%20=%20-1;%20//%20Driver's%20designated%20port%20`uvm_component_utils_begin(driver)%20`uvm_field_int(port_id,%20UVM_ALL_ON%20|%20UVM_DEC)%20`uvm_component_utils_end%20function%20new(string%20name,%20uvm_component%20parent);%20super.new(name,%20parent);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20endfunction:%20new%20function%20void%20build_phase(uvm_phase%20phase);%20super.build_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20uvm_config_db#(int)::get(this,%20"",%20"port_id",%20port_id);%20if%20(!(port_id%20inside%20{-1,%20%5B0:15%5D}))%20begin%20`uvm_fatal("CFGERR",%20$sformatf("port_id%20must%20be%20{-1,%20%5B0:15%5D},%20not%20%250d!",%20port_id));%20end%20uvm_config_db#(virtual%20router_io)::get(this,%20"",%20"vif",%20vif);%20if%20(vif%20==%20null)%20begin%20`uvm_fatal("CFGERR",%20"Interface%20for%20Driver%20not%20set");%20end%20endfunction:%20build_phase%20virtual%20function%20void%20start_of_simulation_phase(uvm_phase%20phase);%20super.start_of_simulation_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20`uvm_info("DRV_CFG",%20$sformatf("port_id%20is:%20%250d",%20port_id),%20UVM_MEDIUM);%20endfunction:%20start_of_simulation_phase%20virtual%20task%20run_phase(uvm_phase%20phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20forever%20begin%20seq_item_port.get_next_item(req);%20if%20(port_id%20inside%20{%20-1,%20req.sa%20})%20begin%20send(req);%20`uvm_info("DRV_RUN",%20{"\n",%20req.sprint()},%20UVM_MEDIUM);%20end%20seq_item_port.item_done();%20end%20endtask:%20run_phase%20//%20//%20In%20the%20interest%20of%20lab%20time,%20all%20device%20drivers%20have%20been%20done%20for%20you:%20//%20virtual%20task%20send(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20send_address(tr);%20send_pad(tr);%20send_payload(tr);%20endtask:%20send%20virtual%20task%20send_address(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20vif.drvClk.frame_n%5Btr.sa%5D%20<=%201'b0;%20for(int%20i=0;%20i<4;%20i++)%20begin%20vif.drvClk.din%5Btr.sa%5D%20<=%20tr.da%5Bi%5D;%20@(vif.drvClk);%20end%20endtask:%20send_address%20virtual%20task%20send_pad(packet%20tr);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20vif.drvClk.din%5Btr.sa%5D%20<=%201'b1;%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b1;%20repeat(5)%20@(vif.drvClk);%20endtask:%20send_pad%20virtual%20task%20send_payload(packet%20tr);%20logic%20%5B7:0%5D%20datum;%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20while(!vif.drvClk.busy_n%5Btr.sa%5D)%20@(vif.drvClk);%20foreach(tr.payload%5Bindex%5D)%20begin%20datum%20=%20tr.payload%5Bindex%5D;%20for(int%20i=0;%20i<$size(tr.payload,%202);%20i++)%20begin%20vif.drvClk.din%5Btr.sa%5D%20<=%20datum%5Bi%5D;%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b0;%20vif.drvClk.frame_n%5Btr.sa%5D%20<=%20((tr.payload.size()-1)%20==%20index)%20&&%20(i==7);%20@(vif.drvClk);%20end%20end%20vif.drvClk.valid_n%5Btr.sa%5D%20<=%201'b1;%20endtask:%20send_payload%20endclass:%20driver]]
 ** TODO MON Create separate section for each task and functions
