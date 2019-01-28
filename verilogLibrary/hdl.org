@@ -5,15 +5,16 @@ Just use TODO option in org capture.
 
 ** Use save-desktop-mode for saving the session in uvm folder
 
-**  Use desktop-change-dir to switch ti uvm session
+** Use desktop-change-dir to switch ti uvm session
 
 ** Save the updated hdl.org to github after each usage.
 
 ** TODO Create Chapters taking reference from LRM
 ** Do not use 
 
+
 * Tasks
-** TODO DRV - Create section for each task and functions in the uvm driver section.
+** TODO DRV Create section for each task and functions in the uvm driver section.
 
 #+BEGIN_SRC verilog
    class driver extends uvm_driver #(packet);
@@ -295,3 +296,23 @@ Just use TODO option in org capture.
    endclass: ms_scoreboard
 
    [[file:~/GitHub/Work/verilogLibrary/UVM_examples/ces_uvm-1.2_2014.12/labs/lab6/ms_scoreboard.sv::class%20ms_scoreboard%20extends%20uvm_scoreboard;%20`uvm_analysis_imp_decl(_before)%20`uvm_analysis_imp_decl(_after)%20uvm_analysis_imp_before%20#(packet,%20ms_scoreboard)%20before_export;%20uvm_analysis_imp_after%20#(packet,%20ms_scoreboard)%20after_export;%20uvm_in_order_class_comparator%20#(packet)%20comparator%5B16%5D;%20int%20count%20=%200;%20realtime%20timeout%20=%2010us;%20`uvm_component_utils(ms_scoreboard)%20function%20new(string%20name,%20uvm_component%20parent);%20super.new(name,%20parent);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20endfunction:%20new%20virtual%20function%20void%20build_phase(uvm_phase%20phase);%20super.build_phase(phase);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20before_export%20=%20new("before_export",%20this);%20after_export%20=%20new("after_export",%20this);%20for%20(int%20i=0;%20i%20<%2016;%20i++)%20begin%20comparator%5Bi%5D%20=%20uvm_in_order_class_comparator%20#(packet)::type_id::create($sformatf("comparator_%250d",%20i),%20this);%20end%20endfunction:%20build_phase%20virtual%20function%20void%20write_before(packet%20pkt);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20comparator%5Bpkt.da%5D.before_export.write(pkt);%20count++;%20endfunction:%20write_before%20virtual%20function%20void%20write_after(packet%20pkt);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20comparator%5Bpkt.da%5D.after_export.write(pkt);%20count--;%20endfunction:%20write_after%20virtual%20task%20wait_for_done();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20fork%20begin%20fork%20wait(count%20==%200);%20begin%20#timeout;%20`uvm_warning("TIMEOUT",%20$sformatf("Scoreboard%20has%20%250d%20unprocessed%20expected%20objects",%20count));%20end%20join_any%20disable%20fork;%20end%20join%20endtask:%20wait_for_done%20virtual%20function%20void%20set_timeout(realtime%20timeout);%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20this.timeout=timeout;%20endfunction:%20set_timeout%20virtual%20function%20realtime%20get_timeout();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20return%20(timeout);%20endfunction:%20get_timeout%20virtual%20function%20void%20report();%20`uvm_info("TRACE",%20$sformatf("%25m"),%20UVM_HIGH);%20foreach%20(comparator%5Bi%5D)%20begin%20`uvm_info("Scoreboard_Report",%20$sformatf("Comparator%5B%250d%5D%20Matches%20=%20%250d,%20Mismatches%20=%20%250d",%20i,%20comparator%5Bi%5D.m_matches,%20comparator%5Bi%5D.m_mismatches),%20UVM_MEDIUM);%20end%20endfunction:%20report%20endclass:%20ms_scoreboard]]
+** SEQ ITEM
+
+#+BEGIN_SRC verilog
+class mydata extends uvm_object;
+string str;
+mydata subdata;
+int field;
+myenum e1;
+int queue[$];
+
+`uvm_object_utils_begin(mydata) //requires ctor with default args
+`uvm_field_string(str, UVM_DEFAULT)
+`uvm_field_object(subdata, UVM_DEFAULT)
+`uvm_field_int(field, UVM_DEC) //use decimal radix
+`uvm_field_enum(myenum, e1, UVM_DEFAULT)
+`uvm_field_queue_int(queue, UVM_DEFAULT)
+`uvm_object_utils_end
+
+endclass
+#+END_SRC

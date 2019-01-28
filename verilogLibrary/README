@@ -1,0 +1,11 @@
+* Directory Structure
+** verilog
+Language related examples
+** sv
+Lnaguage related examples
+** uvm
+Lnaguage related examples
+** Verification
+*** Using VIP
+*** Using Custom 
+** Design 

@@ -1,5 +1,0 @@
--nocopyright
--COMPILEONLY
--cdslib /home/runner/./INCA_libs/irun.lnx86.15.20.nc/cdsrun.lib
--hdlvar /home/runner/./INCA_libs/irun.lnx86.15.20.nc/hdlrun.var
--work worklib

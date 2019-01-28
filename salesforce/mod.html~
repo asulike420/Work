@@ -1,0 +1,155 @@
+<apex:page showHeader="false" applyHtmlTag="false" docType="html-5.0" > 
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+        <script src="{!URLFOR($Resource.angularLibrary, 'angularLibrary/forceng.js')}"></script>
+    </head>
+    <body ng-app="myApp" class="container" ng-controller="myctrl">
+        
+        <ul>
+            <li ng-repeat="opp1 in opps">{{opp1.id}}</li>
+        </ul>
+        <ul ng-repeat="opp in opps" >
+            <li ng-repeat="line in opp.lines">{{line.id}}</li>
+        </ul>
+        
+        <table>
+            <tr ng-repeat="(key, val) in opps"><td>{{key}}</td><td>{{val}}</td></tr>
+        </table>
+        
+    
+        
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <!--<th>Email</th>-->
+                <th>Id</th>
+                <th>Configure</th>
+            </tr>
+            <tr ng-repeat="acc in accounts">          
+                <td>{{acc.Name}}</td>
+                <td>{{acc.Id}}</td>
+            </tr>
+            <tr ng-repeat="con in acc.contacts">
+                <td>{{con.LastName}}</td>
+                <td>{{con.Email}}</td>
+                <td><button type="button" class="btn btn-danger btn-xs" style="margin-right: 1px !important;" ng-click="redirect()">
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <script>
+        
+        var App = angular.module('myApp',  ['forceng']);
+        
+        App.controller('myctrl', function ($scope,force) {
+            console.log('session id'+'{!$Api.Session_ID}');
+            console.log('id::'+'{!$CurrentPage.parameters.id}');
+            var accId = '{!$CurrentPage.parameters.id}';
+            //Initialize ngForce connection
+            force.init({accessToken: '{!$Api.Session_ID}', useProxy:false, instanceURL: 'https://mylightdomain123-dev-ed--c.ap5.visual.force.com'});
+            
+            //console.log('session id'+'{!$Api.Session_ID}');       
+
+
+	    //Initialize variables
+            $scope.accounts = [];
+            //$scope.acc ={
+            //    Name: '',
+            //    Id: '',
+            //    contacts: []
+            //}
+	    $scope.acc = [];
+            $scope.opps =[];
+
+	    
+            $scope.getAccounts = function(){
+                console.log('get accounts'+accId);
+                //force.query('SELECT id,Name from Account WHERE Id= \''+accId+'\'').then(
+		force.query('SELECT id,Name from Account limit 4').then(
+                    function (response) {
+                        var accRec = response.records;//Array of records
+			if (accRec.length > 0){
+			    $scope.accounts = accRec;
+			    for(var i = 0; i < accRec.length; i++){
+				$scope.acc[i] = {
+				    Name: accRec[i].Name;
+				    Id : accRec[i].Id;
+				}	
+			    }
+			}
+			//if(accRec.length == 1){ //Expecting only one record
+                        //    $scope.acc.Name= accRec[0].Name;
+                        //    $scope.acc.Id = accRec[0].Id;
+                        //   console.log('id::'+accRec[0].Id);
+                        //}
+			
+                        /*var lines = response.records;
+                            if(lines.length > 0){
+                               for(var j=0;j<lines.length;j++){
+                                   
+                                        $scope.accounts.push({
+                                            Name: lines[j].Name,
+                                            Id: lines[j].Id
+                                        }); 
+                               }
+                            }*/
+                        
+                    }
+                );
+            }
+            // $scope.getAccounts();
+            $scope.getContacts = function(){
+                console.log($scope.acc.Id);
+                force.query('SELECT Id,LastName,Email from contact WHERE accountId = \''+$scope.acc.Id+'\'').then(
+                    function(response){
+                        var cons = response.records;
+                        console.log('rec 1::'+cons[0].Id);
+                        if(cons.length>0){
+                            for(var j=0;j<cons.length;j++){
+                                $scope.acc.contacts.push({
+                                    LastName: cons[j].LastName,
+                                    Email: cons[j].Email
+                                }); 
+                            }
+                            console.log('cons::'+$scope.acc.contacts)
+                        }
+                    }
+                );    
+            }
+            //$scope.getContacts();
+            $scope.getOpp =function(){
+                force.query('Select id,Name,(Select id from OpportunityLineItems) from Opportunity').then(
+                    function(response){
+                        var opp = response.records;
+                        angular.forEach(opp, function(item) {
+                            var obj = {};
+                            
+                            
+                            //valObj.Name = item.Name;
+                            //obj[item.Id] = valObj;
+                            var lines = [];
+                            lines =  JSON.stringify(item.OpportunityLineItems);
+                            console.log('lines::'+JSON.stringify(lines)+'item::'+item.Name);
+                            angular.forEach(lines, function(value){
+                                var valObj = {};
+                                /* valObj.Id = item.Id;
+                                obj[item.Id] = valObj;
+                                $scope.opps.push(obj);*/
+                                console.log('value'+value.id);
+                                });
+                        });
+                    }
+                );
+            }
+            $scope.redirect = function(){
+                $window.location.href = 'apex/testVF';
+            }
+            $scope.getOpp();
+        });
+        </script>
+    </body>
+</apex:page>

@@ -1,1 +1,0 @@
-SPECMAN_XL_ADAPTER="`sn_root`/specman/`sn_arch.sh`/libikarus_sn_adapter.so"
