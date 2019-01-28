@@ -1,0 +1,116 @@
+{
+    "LVLData": [
+        "SIM"
+    ],
+    "stat": {
+        "nMops": 407788
+    },
+    "Misc": {
+        "cwd": "/home/runner",
+        "csrc": "csrc",
+        "csrc_abs": "/home/runner/csrc",
+        "default_output_dir": "csrc",
+        "daidir_abs": "/home/runner/simv.daidir",
+        "daidir": "simv.daidir",
+        "archive_dir": "archive.0"
+    },
+    "NameTable": {
+        "_vcs_DPI_package": [
+            "_vcs_DPI_package",
+            "uM9F1",
+            "module"
+        ],
+        "host_io": [
+            "host_io",
+            "zQ0SK",
+            "module"
+        ],
+        "router": [
+            "router",
+            "yFjQe",
+            "module"
+        ],
+        "vcs_paramclassrepository": [
+            "vcs_paramclassrepository",
+            "hEeZs",
+            "module"
+        ],
+        "test": [
+            "test",
+            "x9Hvb",
+            "module"
+        ],
+        "_vcs_unit__4210886309": [
+            "_vcs_unit__4210886309",
+            "mbgwA",
+            "module"
+        ],
+        "...MASTER...": [
+            "SIM",
+            "amcQw",
+            "module"
+        ],
+        "std": [
+            "std",
+            "reYIK",
+            "module"
+        ],
+        "uvm_pkg": [
+            "uvm_pkg",
+            "zr7M1",
+            "module"
+        ],
+        "router_io": [
+            "router_io",
+            "WSps8",
+            "module"
+        ],
+        "reset_io": [
+            "reset_io",
+            "Qc1ND",
+            "module"
+        ],
+        "iport": [
+            "iport",
+            "w69je",
+            "module"
+        ],
+        "oport": [
+            "oport",
+            "qNPkI",
+            "module"
+        ],
+        "router_test_top": [
+            "router_test_top",
+            "Cy4Zv",
+            "module"
+        ]
+    },
+    "CompileStrategy": "fullobj",
+    "CurCompileUdps": {},
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 306534
+    },
+    "CompileProcesses": [
+        "cgproc.373.json"
+    ],
+    "CurCompileModules": [
+        "...MASTER...",
+        "vcs_paramclassrepository",
+        "_vcs_DPI_package",
+        "_vcs_unit__4210886309",
+        "std",
+        "uvm_pkg",
+        "host_io",
+        "router_io",
+        "reset_io",
+        "router",
+        "iport",
+        "oport",
+        "router_test_top",
+        "test"
+    ],
+    "PEModules": [],
+    "CompileStatus": "Successful"
+}

@@ -1,0 +1,14 @@
+-DNCSC
+-I/incisiv/15.20/tools/inca/include
+-I/incisiv/15.20/tools/include
+-I/incisiv/15.20/tools/methodology/OVM/CDNS-2.1.2/sc/src
+-I/incisiv/15.20/tools/systemc/include/cci
+-I/incisiv/15.20/tools/systemc/include/factory
+-I/incisiv/15.20/tools/systemc/include/tlm2
+-I/incisiv/15.20/tools/systemc/include_pch
+-I/incisiv/15.20/tools/tbsc/include
+-I/incisiv/15.20/tools/vic/include
+-I/playground_lib/uvm-1.2/ml/sc
+-I/playground_lib/uvm-1.2/sc/sc
+-c
+-x c++ -m32  -Wall 

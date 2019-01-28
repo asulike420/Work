@@ -1,0 +1,1 @@
+s1(12Apr2018:02:04:16):  irun -Q -unbuffered -timescale 1ns/1ns -sysv +UVM_TESTNAME=mem_ss_test -access +rw -uvmnocdnsextra -uvmhome /playground_lib/uvm-1.2 /playground_lib/uvm-1.2/src/uvm_macros.svh design.sv testbench.sv 

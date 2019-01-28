@@ -1,0 +1,20 @@
+
+ virtual_reset_sequencer  v_reset_sqr;
+uvm_config_db #(uvm_object_wrapper)::set(this, "env.*.sqr.reset_phase", "default_sequence", null);
+    v_reset_sqr = virtual_reset_sequencer::type_id::create("v_reset_sqr", this);
+    uvm_config_db #(uvm_object_wrapper)::set(this, "v_reset_sqr.reset_phase", "default_sequence", virtual_reset_sequence::get_type());
+
+
+ v_reset_sqr.r_sqr = env.r_agt.sqr;
+    v_reset_sqr.h_sqr = env.h_agt.sqr;
+
+
+  typedef uvm_sequencer#(reset_tr)  reset_sequencer;
+  typedef uvm_sequencer#(packet)    packet_sequencer;
+
+  reset_sequence                    r_seq;
+  router_input_port_reset_sequence  i_seq;
+  uvm_event reset_event = uvm_event_pool::get_global("reset");
+  `uvm_declare_p_sequencer(virtual_reset_sequencer)
+   `uvm_do_on(r_seq, p_sequencer.r_sqr);
+
