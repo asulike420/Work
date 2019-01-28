@@ -1,0 +1,171 @@
+
+axi_common.sv,489
+  function new(21,486
+  function new(37,836
+function bit 51,1279
+function AXI_transfer 74,1777
+function bit 79,1889
+function void 90,2121
+function void 100,2375
+function AXI_transfer 117,2697
+  function new(138,3253
+function void 158,4031
+function void 171,4301
+function void 183,4549
+function void 188,4681
+function void 203,5148
+function void 208,5313
+function void 214,5525
+function void 219,5656
+function void 224,5797
+function void 269,7048
+function void 273,7146
+
+axi_conf.sv,353
+  function new 42,1335
+  function new 96,3428
+  function new 117,3912
+  function new 144,4616
+  function new 169,5295
+function void 222,8178
+function void 267,10568
+function AXI_master_conf 306,12624
+function AXI_slave_conf 315,12860
+function AXI_slave_conf 324,13091
+function void 334,13380
+function void 341,13510
+function void 348,13637
+
+axi_env.sv,138
+  function new(32,814
+function void 48,1234
+function void 60,1480
+function void 72,1828
+function void 85,2201
+function void 92,2438
+
+axi_master_agent.sv,22
+	function new(27,631
+
+axi_master_driver.sv,93
+  function new 34,1036
+function void 65,2075
+function void 70,2179
+function void 76,2298
+
+axi_master_monitor.sv,169
+  function new 78,2112
+function void 126,3760
+function void 131,3877
+function void 137,4011
+function void 151,4496
+function void 186,5331
+function void 528,15997
+
+axi_master_sequencer.sv,23
+  function new 18,501
+
+axi_pkg.sv,55
+package axi_pkg;12,206
+import uvm_pkg:uvm_pkg15,283
+
+axi_slave_agent.sv,22
+	function new(29,642
+
+axi_slave_driver.sv,116
+  function new 33,966
+function void 70,2183
+function void 75,2286
+function void 81,2403
+function void 299,7668
+
+axi_slave_monitor.sv,170
+  function new 76,2129
+function void 127,3906
+function void 132,4022
+function void 138,4154
+function void 152,4637
+function void 452,14353
+function void 555,17548
+
+axi_slave_sequencer.sv,23
+  function new 18,495
+
+axi_transfer.sv,49
+  function new 59,1948
+  function new 110,3723
+
+axi_type.sv,384
+function dec_direction(20,419
+function burst_enum 30,720
+function byte_enum 49,1259
+function len_enum 96,2543
+function cache_enc_enum 174,5710
+function protect_enc_enum 216,7317
+function lock_enum 236,7947
+function response_enum 252,8508
+function int 262,8779
+function int 270,8954
+function int 278,9133
+function int 286,9312
+function int 294,9483
+function int 302,9670
+
+axi_vif.sv,2384
+	  bit has_checks 34,1183
+	  bit has_coverage	35,1208
+    logic [C_AXI_ID_WIDTH-1:0]		AXI_AWID;42,1345
+    logic [C_AXI_ADDR_WIDTH-1:0]	AXI_AWADDR;43,1404
+    logic [C_AXI_REG_WITH-1:0]    AXI_AWREG;44,1449
+    logic [C_AXI_LEN_WIDTH-1:0]		AXI_AWLEN;45,1494
+    logic [C_AXI_SIZE_WIDTH-1:0]	AXI_AWSIZE;46,1538
+    logic [C_AXI_BURST_WIDTH-1:0]	AXI_AWBURST;47,1583
+    logic [C_AXI_LOCK_WIDTH-1:0]	AXI_AWLOCK;48,1630
+    logic [C_AXI_CACHE_WIDTH-1:0]	AXI_AWCACHE;49,1675
+    logic [C_AXI_PROT_WIDTH-1:0]	AXI_AWPROT;50,1722
+    logic [C_AXI_QOS_WIDTH-1:0]		AXI_AWQOS;51,1767
+    logic [C_AXI_VALID_WIDTH-1:0]	AXI_AWVALID;52,1811
+    logic [C_AXI_READY_WIDTH-1:0]	AXI_AWREADY;53,1858
+    logic [C_AXI_ID_WIDTH-1:-0]   AXI_WID;56,1931
+    logic [C_AXI_DATA_WIDTH-1:0]	AXI_WDATA;57,1974
+    logic [C_AXI_STRB_WIDTH-1:0]	AXI_WSTRB;58,2018
+    logic [C_AXI_LAST_WIDTH-1:0]	AXI_WLAST;59,2062
+    logic [C_AXI_VALID_WIDTH-1:0] AXI_WVALID;60,2106
+    logic [C_AXI_READY_WIDTH-1:0]	AXI_WREADY;61,2152
+    logic [C_AXI_ID_WIDTH-1:0]		AXI_BID;64,2228
+    logic [C_AXI_RESP_WIDTH-1:0]	AXI_BRESP;65,2269
+    logic [C_AXI_VALID_WIDTH-1:0]	AXI_BVALID;66,2313
+    logic [C_AXI_READY_WIDTH-1:0]	AXI_BREADY;67,2359
+    logic [C_AXI_ID_WIDTH-1:0]		AXI_ARID;70,2433
+    logic [C_AXI_ADDR_WIDTH-1:0]	AXI_ARADDR;71,2475
+    logic [C_AXI_REG_WITH-1:0]    AXI_ARREG;72,2520
+    logic [C_AXI_LEN_WIDTH-1:0]		AXI_ARLEN;73,2565
+    logic [C_AXI_SIZE_WIDTH-1:0]	AXI_ARSIZE;74,2609
+    logic [C_AXI_BURST_WIDTH-1:0]	AXI_ARBURST;75,2654
+    logic [C_AXI_LOCK_WIDTH-1:0]	AXI_ARLOCK;76,2701
+    logic [C_AXI_CACHE_WIDTH-1:0]	AXI_ARCACHE;77,2746
+    logic [C_AXI_PROT_WIDTH-1:0]	AXI_ARPROT;78,2793
+    logic [C_AXI_QOS_WIDTH-1:0]		AXI_ARQOS;79,2838
+    logic [C_AXI_VALID_WIDTH-1:0]	AXI_ARVALID;80,2882
+    logic [C_AXI_READY_WIDTH-1:0]	AXI_ARREADY;81,2929
+    logic [C_AXI_ID_WIDTH-1:0]		AXI_RID;84,3001
+    logic [C_AXI_DATA_WIDTH-1:0]	AXI_RDATA;85,3042
+    logic [C_AXI_RESP_WIDTH-1:0]	AXI_RRESP;86,3086
+    logic [C_AXI_LAST_WIDTH-1:0]	AXI_RLAST;87,3130
+    logic [C_AXI_VALID_WIDTH-1:0]	AXI_RVALID;88,3174
+    logic [C_AXI_READY_WIDTH-1:0]	AXI_RREADY;89,3220
+always @(113,3847
+assertWriteDataUnknown:assert property 124,4272
+assertWriteRespUnKnown:assert property 131,4592
+assertReadAddrUnKnown:assert property 138,4926
+assertReadDataUnKnown:assert property 145,5256
+
+axi_slave_recorder.sv,0
+
+axi_pat.sv,0
+
+axi_master_recorder.sv,0
+
+axi_coverage.sv,0
+
+axi_assertions.sv,0
