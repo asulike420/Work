@@ -1,0 +1,64 @@
+module seq_detector(reset, in, clk , detected);
+
+   input logic in, clk, reset;
+   
+   output logic detected;
+
+   enum 	bit [3:0] {S0=4b'0001, S1=4b'0010, S2=4b'0100, S3=4b'1000} n_state, p_state;
+
+  initial $monitor("p_state=%b",p_state);
+   
+   
+   always @(posedge clk)
+   if(!reset) begin
+     p_state <= S0;
+      detected <= 0;
+      end
+   else
+     begin
+     p_state <= n_state;
+	if (n_state == S3)	detected <= 1;
+	else detected <= 0;
+     end
+
+   always @(*)
+     begin
+	case (p_state)//detects x and z case uniquely.
+	  S0: begin
+	      //detected <= 1'b1;
+	     if (in== 1) n_state = S1;
+	     else n_state = S0;
+	     
+	  end
+	  S1: begin
+	      //detected <= 1'b1;
+	     if(in == 0) n_state = S2;
+	     else n_state = S1;
+	     
+	  end
+	  S2: begin
+	      //detected <= 1'b1;
+	     if(in == 1) n_state = S3;
+	     else n_state = S0;
+	     
+	  end
+	  S3: begin
+	    // detected <= 1'b1;
+       	     if (in == 1) n_state = S1;
+	     else
+	       n_state = S2;
+	  end
+	  default: $("State not present");
+	endcase // case (p_state)
+	
+     end
+   
+
+
+   
+
+endmodule // seq_detector
+
+
+
+   
