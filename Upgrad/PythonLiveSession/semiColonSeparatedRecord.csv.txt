@@ -1,0 +1,3 @@
+Name; Math;  English; Hindi; Science
+Abhay; 10; 20; 30;
+Sugandha; 30; 40; 60; 80
