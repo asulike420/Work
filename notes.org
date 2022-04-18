@@ -1,0 +1,12 @@
+* Inbox
+** [2020-09-20 Sun 00:18] [Reporting] uvm_info
+`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);
+[[file:~/Documents/GitHub/Work/verilogLibrary/uvm/UVM_examples/EdaplaygroundBackup/sys_lab6/test_collection.sv::`uvm_info("TRACE", $sformatf("%m"), UVM_HIGH);]]
+** [2020-09-20 Sun 00:06] [RAL] Include RAL coverage
+  uvm_reg::include_coverage("*", UVM_CVR_ALL);
+[[file:~/Documents/GitHub/Work/verilogLibrary/uvm/UVM_examples/EdaplaygroundBackup/sys_lab6/test.sv::uvm_reg::include_coverage("*", UVM_CVR_ALL);]]
+** [2020-09-20 Sun 00:02] [Others] Commnad line processing
+// For convenience, access to the command line processor is done for you
+uvm_cmdline_processor clp = uvm_cmdline_processor::get_inst();
+clp.get_arg_value("+seq=", seq_name);
+[[file:~/Documents/GitHub/Work/verilogLibrary/uvm/UVM_examples/EdaplaygroundBackup/sys_lab6/test_collection.sv::clp.get_arg_value("+seq=", seq_name);]]
