@@ -1,0 +1,147 @@
+xrun: 20.09-s003: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
+TOOL:	xrun	20.09-s003: Started on Oct 17, 2023 at 22:06:37 EDT
+xrun
+	-Q
+	-unbuffered
+	-timescale 1ns/1ps
+	-sysv
+	-access +rw
+	-uvm
+	-uvmnocdnsextra
+	-disable_sem2009
+	-nowarn RNDXCELON
+	-svseed 1234
+	-define DUMP_VCD
+	vutils_pkg.sv
+	ahb_if.sv
+	ahb_pkg.sv
+	testbench.sv
+	+UVM_TESTNAME=ahb_test
+	Top level design units:
+		uvm_pkg
+		vutils_pkg
+		ahb_pkg
+		testbench
+Loading snapshot worklib.testbench:sv .................... Done
+SVSEED set from command line: 1234
+xcelium> source /xcelium20.09/tools/xcelium/files/xmsimrc
+xcelium> source /xcelium20.09/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+----------------------------------------------------------------
+CDNS-UVM-1.1d (20.09-s003)
+(C) 2007-2013 Mentor Graphics Corporation
+(C) 2007-2013 Cadence Design Systems, Inc.
+(C) 2006-2013 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+xmsim: *W,PRPASZ: Packed array at "worklib.uvm_pkg::uvm_string_to_bits.uvm_string_to_bits" of 115200 bits exceeds limit of 4096 - not probed
+ Use 'probe -create -packed 115200 worklib.uvm_pkg::uvm_string_to_bits.uvm_string_to_bits' or 'setenv SHM_PACKED_LIMIT 115200' to adjust limit.
+xmsim: *W,PRPASZ: Packed array at "worklib.uvm_pkg::uvm_bits_to_string.str" of 115200 bits exceeds limit of 4096 - not probed
+ Use 'probe -create -packed 115200 worklib.uvm_pkg::uvm_bits_to_string.str' or 'setenv SHM_PACKED_LIMIT 115200' to adjust limit.
+UVM_INFO @ 0.000 ns: reporter [RNTST] Running test ahb_test...
+UVM_INFO ahb_agent.svh(25) @ 0.000 ns: uvm_test_top.env.mst_agent [ahb_agent] creating default cfg ...
+UVM_INFO ahb_agent.svh(25) @ 0.000 ns: uvm_test_top.env.slv_agent [ahb_agent] creating default cfg ...
+UVM_INFO ahb_agent.svh(52) @ 0.000 ns: uvm_test_top.env.mst_agent [ahb_agent] AHB_CFG: Slave=0, Active=UVM_ACTIVE, Busy: RD => [1 : 1], WR => [0 : 3]
+UVM_INFO ahb_agent.svh(52) @ 0.000 ns: uvm_test_top.env.slv_agent [ahb_agent] AHB_CFG: Slave=1, Active=UVM_ACTIVE, Busy: RD => [0 : 10], WR => [0 : 7]
+UVM_INFO ahb_agent.svh(70) @ 0.000 ns: uvm_test_top.env.slv_agent [ahb_agent] set tr_print = 0
+UVM_INFO ahb_driver.svh(151) @ 0.000 ns: uvm_test_top.env.slv_agent.drv [ahb_driver] initialize bus
+UVM_INFO ahb_driver.svh(151) @ 0.000 ns: uvm_test_top.env.mst_agent.drv [ahb_driver] initialize bus
+UVM_INFO ahb_base_seq.svh(7) @ 0.000 ns: uvm_test_top.env.mst_agent.sqr@@uvm_sequence [ahb_mst_rand_seq] start seq ...
+UVM_INFO ahb_base_seq.svh(7) @ 0.000 ns: uvm_test_top.env.slv_agent.sqr@@rsp_seq [ahb_slv_resp_seq] start seq ...
+UVM_INFO ahb_mst_rand_seq.svh(10) @ 0.000 ns: uvm_test_top.env.mst_agent.sqr@@uvm_sequence [ahb_mst_rand_seq] item_count = 19
+UVM_INFO ahb_slv_resp_seq.svh(12) @ 0.000 ns: uvm_test_top.env.slv_agent.sqr@@rsp_seq [ahb_slv_resp_seq] Latencies: RD => 4, WR => 0
+UVM_INFO testbench.sv(44) @ 50.000 ns: reporter [tb] released reset ...
+UVM_INFO ahb_monitor.svh(60) @ 115.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0xfffffff8, size=WORD, length=0, wrap=0, data=0xa27d77ea, busy=5
+AHB_RSP WRITE: addr=0xfffffff8 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 225.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x8eb69230, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x8eb69230 resp=OKAY, data=0x298d83df, busy=11
+UVM_INFO ahb_monitor.svh(60) @ 335.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0xf357bc5c, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0xf357bc5c resp=OKAY, data=0xe134d842, busy=11
+UVM_INFO ahb_monitor.svh(60) @ 385.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0xc4f98c54, size=WORD, length=0, wrap=0, data=0x393fc42b, busy=5
+AHB_RSP WRITE: addr=0xc4f98c54 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 405.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0x354d10d4, size=WORD, length=0, wrap=0, data=0xeacc36d5, busy=2
+AHB_RSP WRITE: addr=0x354d10d4 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 505.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0xf5a2ef0c, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0xf5a2ef0c resp=OKAY, data=0x413b3a45, busy=10
+UVM_INFO ahb_monitor.svh(60) @ 655.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0xed480bfc, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0xed480bfc resp=OKAY, data=0xf13e6b47, busy=15
+UVM_INFO ahb_monitor.svh(60) @ 675.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0x5a74114c, size=WORD, length=0, wrap=0, data=0xbcedf2a3, busy=2
+AHB_RSP WRITE: addr=0x5a74114c resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 715.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0xfffffff4, size=WORD, length=0, wrap=0, data=0x2006d7f8, busy=4
+AHB_RSP WRITE: addr=0xfffffff4 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 785.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x3f39c0b4, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x3f39c0b4 resp=OKAY, data=0xb5fdf46a, busy=7
+UVM_INFO ahb_monitor.svh(60) @ 925.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x162871a8, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x162871a8 resp=OKAY, data=0xd56d13f5, busy=14
+UVM_INFO ahb_monitor.svh(60) @ 955.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0xd0961f34, size=WORD, length=0, wrap=0, data=0x14a8c2d0, busy=3
+AHB_RSP WRITE: addr=0xd0961f34 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 985.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0x6eea5ae8, size=WORD, length=0, wrap=0, data=0x3728f1db, busy=3
+AHB_RSP WRITE: addr=0x6eea5ae8 resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 1095.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x00000004, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x00000004 resp=OKAY, data=0xf562f43c, busy=11
+UVM_INFO ahb_monitor.svh(60) @ 1145.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x3ca993ec, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x3ca993ec resp=OKAY, data=0x0d10aaa3, busy=5
+UVM_INFO ahb_monitor.svh(60) @ 1155.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0x0000000c, size=WORD, length=0, wrap=0, data=0x4b749e2a, busy=1
+AHB_RSP WRITE: addr=0x0000000c resp=OKAY
+UVM_INFO ahb_monitor.svh(60) @ 1225.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD READ: addr=0x4a633dec, size=WORD, length=0, wrap=0
+AHB_RSP READ: addr=0x4a633dec resp=OKAY, data=0x946daff1, busy=7
+UVM_INFO ahb_monitor.svh(60) @ 1245.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0xfffffff8, size=WORD, length=0, wrap=0, data=0x8b77af23, busy=2
+AHB_RSP WRITE: addr=0xfffffff8 resp=OKAY
+UVM_INFO ahb_driver.svh(135) @ 1245.000 ns: uvm_test_top.env.mst_agent.drv [ahb_driver] insert idle cycle
+UVM_INFO ahb_monitor.svh(60) @ 1265.000 ns: uvm_test_top.env.mst_agent.mon [ahb_monitor] Rcvd ahb item: 
+AHB_CMD WRITE: addr=0x00000008, size=WORD, length=0, wrap=0, data=0x44ba2a6e, busy=2
+AHB_RSP WRITE: addr=0x00000008 resp=OKAY
+UVM_INFO ahb_base_seq.svh(11) @ 1365.000 ns: uvm_test_top.env.mst_agent.sqr@@uvm_sequence [ahb_mst_rand_seq] end seq ...
+UVM_INFO /xcelium20.09/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 1365.000 ns: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   35
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[TEST_DONE]     1
+[ahb_agent]     5
+[ahb_driver]     3
+[ahb_monitor]    19
+[ahb_mst_rand_seq]     3
+[ahb_slv_resp_seq]     2
+[tb]     1
+Simulation complete via $finish(1) at time 1365 NS + 49
+/xcelium20.09/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
+xcelium> exit
+TOOL:	xrun	20.09-s003: Exiting on Oct 17, 2023 at 22:06:42 EDT  (total: 00:00:05)

@@ -1,0 +1,1 @@
+s1(17Oct2023:22:06:37):  xrun -Q -unbuffered -timescale 1ns/1ps -sysv -access +rw -uvm -uvmnocdnsextra -disable_sem2009 -nowarn RNDXCELON -svseed 1234 -define DUMP_VCD vutils_pkg.sv ahb_if.sv ahb_pkg.sv testbench.sv +UVM_TESTNAME=ahb_test 

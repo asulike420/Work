@@ -1,0 +1,82 @@
+{
+ "builder": {
+  "_logger": "hdl_checker.builders.fallback",
+  "_builtin_libraries": [],
+  "_added_libraries": [
+   {
+    "name": "not_in_project",
+    "case_sensitive": true,
+    "__class__": "Identifier"
+   }
+  ],
+  "_version": "<undefined>",
+  "_work_folder": "/mnt/f/Git/Work/verilogLibrary/.hdl_checker",
+  "__class__": "Fallback"
+ },
+ "config_file": null,
+ "database": {
+  "sources": [],
+  "inferred_libraries": [],
+  "design_units": [
+   {
+    "owner": {
+     "name": "/mnt/f/Git/Work/verilogLibrary/uvm/uvm-1.2/src/uvm_pkg.sv",
+     "__class__": "Path"
+    },
+    "type_": "package",
+    "name": {
+     "name": "uvm_pkg",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      27,
+      8
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/tmp/tmpf4izo0ym.sv",
+     "__class__": "Path"
+    },
+    "type_": "package",
+    "name": {
+     "name": "uvm_pkg",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      27,
+      8
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/tmp/tmph8nwz9wb.sv",
+     "__class__": "Path"
+    },
+    "type_": "package",
+    "name": {
+     "name": "uvm_pkg",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      27,
+      8
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   }
+  ],
+  "__class__": "Database"
+ },
+ "__version__": "0.7.4"
+}
