@@ -1,0 +1,72 @@
+
+* TODO Read and Write pointer synchronization
+* TODO Read operation
+** Wait for rd_en to be  asserted
+** Check write pointer if data is avialable for read
+** If no data is availble then assert empty_flag
+** else If data is available
+*** If current pointer is at the end of fifo, then set the poiter to start of fifo
+*** Else Increment rd_pointer after read
+* TODO Write operation
+** Wait for wr_en to be asserted
+** Check read_pointer  if the fifo is empty
+** If the fifo is almost full, then assert almost full flag
+** Else if fifo is full, assert full flag
+** else if fifo is empty
+*** if the wr poiter at the end of fifo, wrap the pointer
+*** else increment the pointer
+* TODO Overflow condition
+* TODO Underflow condition
+* TODO Full Condition
+* TODO Almost full
+* TODO Empty Condition
+* TODO Use onehot/gray coding for pointers
+* TODO Parameterize data width and  depth
+* Code
+** Read
+*** STATE : RESET, EMPTY, READ
+
+#+begin_src verilog
+    module my_fifo(
+		   //Read
+		   input			 rd_en,
+		   input			 rd_clk,
+		   output [DATA_WIDTH-1:0] rd_data,
+		   output			 almost_empty,
+		   output			 empty,
+		   //Write
+		   input			 wr_en,
+		   input			 wr_clk,
+		   input [DATA_WIDTH-1:0]	 wr_data,
+		   output			 almost_full,
+		   output			 full,
+		   //reset
+		   input			 reset
+		   );
+
+       reg [DATA_WIDTH-1:0]		       mem [FIFO_DEPTH];
+       enum				       bit [3:0] { 
+							     RD_IDLE,
+							     EMPTY,
+							     ALMOST_EMPTY,
+							     READ
+							     }	rd_states;
+     enum					       bit [3:0] { 
+							     FULL,
+							     ALMOST_ALMOST,
+							     WRITE
+							     }	wr_states;
+
+     wire					       
+
+
+
+  always ()
+
+
+    endmodule
+
+#+end_src
+
+
+
